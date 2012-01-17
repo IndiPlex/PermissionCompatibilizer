@@ -1,0 +1,6 @@
+name: PermCom
+
+author: IndiPlex Team
+
+main: de.indiplex.permcom.PermissionCompatibilizer
+version: 0.0.1
