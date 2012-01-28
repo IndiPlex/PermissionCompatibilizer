@@ -30,19 +30,33 @@ public class PermissionCompatibilizer extends IPMPlugin {
     private PermComAPI pcApi;
 
     @Override
-    public void onDisable() {
-        printDisabled(pre);
-    }
-
-    @Override
-    public void onEnable() {
+    protected void onIPMLoad() {
         IPMAPI api = getAPI();
         
         pcApi = new PermComAPI();
-        log.info(pre+"Using "+pcApi.getPermPluginName()+" for permissions");
         api.registerAPI("PermCom", pcApi);
-        
+    }
+    
+    @Override
+    public void onEnable() {
+        log.info(pre+"Using "+pcApi.getPermPluginName()+" for permissions");
         printEnabled(pre);
+    }
+
+    @Override
+    public void onDisable() {
+        printDisabled(pre);
+    }
+    
+    private static IPMAPI API;
+
+    @Override
+    protected void init(IPMAPI API) {
+        PermissionCompatibilizer.API = API;
+    }
+
+    public static IPMAPI getAPI() {
+        return API;
     }
     
 }
